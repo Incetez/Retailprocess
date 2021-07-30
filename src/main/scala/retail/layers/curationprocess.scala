@@ -11,6 +11,7 @@ object curationprocess
   val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
   def curateprocess(spark:SparkSession)=
   {
+    spark.sql("DROP DATABASE IF EXISTS retail_curated CASCADE")
     spark.sql("create database if not exists retail_curated")
     logger.warn("====curation process started at " + format.format(Calendar.getInstance().getTime()))
     

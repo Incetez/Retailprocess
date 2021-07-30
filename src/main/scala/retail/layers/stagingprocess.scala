@@ -13,6 +13,7 @@ object stagingprocess
   {
     
     //create database
+      spark.sql("DROP DATABASE IF EXISTS retail_stg CASCADE")
       spark.sql("create database if not exists retail_stg")
       logger.warn("======staging process started at " + format.format(Calendar.getInstance().getTime()))
       readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Customers.csv","retail_stg.tblcustomer_stg")
