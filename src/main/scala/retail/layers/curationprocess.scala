@@ -20,7 +20,7 @@ object curationprocess
     
     val dfproduct1 = dfproduct.withColumn("profit", col("ProductPrice") - col("ProductCost"))
     
-    dfproduct1.write.format("orc").mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblproduct_dtl")
+    dfproduct1.write.mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblproduct_dtl")
     
     logger.warn("=== data written into product table in curated database=======")
     
@@ -29,7 +29,7 @@ object curationprocess
     val dfcustomer1 = dfcustomer.withColumn("Birth_Date",to_date(col("BirthDate"),"M/d/yyyy"))
                                 .withColumn("Annual_Income",regexp_replace(regexp_replace(col("AnnualIncome"),"\\$",""),",","").cast("int"))
                                 .drop("BirthDate","AnnualIncome")
-    dfcustomer1.write.format("orc").mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblcustomer_dtl")
+    dfcustomer1.write.mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblcustomer_dtl")
     
     logger.warn("=== data written into customer table in curated database=======")
     
@@ -38,12 +38,12 @@ object curationprocess
      .withColumn("Stock_Date",to_date(col("StockDate"),"M/d/yyyy"))                      
      .drop("OrderDate","StockDate")
      
-    dfsales1.write.format("orc").mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblsales_dtl")
+    dfsales1.write.mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblsales_dtl")
     
     logger.warn("=== data written into sales table in curated database=======")
     
     val dfterritory = spark.sql("""select SalesTerritoryKey,Region,Country,Continent,load_dt from retail_stg.tblterritory_stg""")
-    dfterritory.write.format("orc").mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblterritory_dtl")
+    dfterritory.write.mode("overwrite").partitionBy("load_dt").saveAsTable("retail_curated.tblterritory_dtl")
     logger.warn("=== data written into territory table in curated database=======")
     
     logger.warn("====curation process completed at " + format.format(Calendar.getInstance().getTime()))
