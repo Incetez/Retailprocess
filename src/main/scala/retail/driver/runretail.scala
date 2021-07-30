@@ -11,18 +11,18 @@ import retail.layers._
 object runretail {
   
   val logger = Logger.getLogger(this.getClass.getName)
-  PropertyConfigurator.configure("/apps/project/Retailprocess/log4j.properties")
+ 
   
   def main(args:Array[String])=
   {
     try
     {
-  
+      PropertyConfigurator.configure("log4j.properties")
       val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
       logger.warn("======process started at " + format.format(Calendar.getInstance().getTime()))
       
       val spark = SparkSession.builder()
-       .config("hive.metastore.uris","thrift://localhost:9083")
+      //.config("hive.metastore.uris","thrift://localhost:9083")
       .appName("Retail-coreengine")
       .master("local")
       .enableHiveSupport()
