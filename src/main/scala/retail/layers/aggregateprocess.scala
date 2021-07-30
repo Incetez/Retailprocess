@@ -33,7 +33,7 @@ object aggregateprocess
     
         
     val dfterritory = spark.sql("""select s.Order_Date,t.Region,t.Country,t.Continent,sum(s.OrderQuantity) orderquantity 
-      from retail_curated.tblsales_dtl s inner join retail_curated.tblterritory_dtl t on s.SalesTerritoryKey = t.TerritoryKey 
+      from retail_curated.tblsales_dtl s inner join retail_curated.tblterritory_dtl t on s.TerritoryKey  = t.SalesTerritoryKey
       group by s.Order_Date,t.Region,t.Country,t.Continent""")
     
     dfterritory.write.mode("overwrite").partitionBy("Order_Date").saveAsTable("retail_agg.tbl_fact_territorysales")
