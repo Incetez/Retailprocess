@@ -24,6 +24,7 @@ object stagingprocess
       logger.warn("======staging process completed at " + format.format(Calendar.getInstance().getTime()))
     
   }
+  
    def readfileandwriteintostaging(spark:SparkSession,filename:String,tablename:String)=
   {
     logger.warn("reading data from the file:" + filename)
