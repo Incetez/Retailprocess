@@ -1,19 +1,25 @@
 package retail.driver
 import org.apache.log4j.Logger
+import org.apache.log4j.Level
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import org.apache.spark.sql.SparkSession
-import retail.commons.utilities._
+import org.apache.log4j.PropertyConfigurator
+import retail.layers._
+
 
 object runretail {
   
-  val log = Logger.getLogger(this.getClass)
+  val logger = Logger.getLogger(this.getClass.getName)
+  PropertyConfigurator.configure("/apps/project/Retailprocess/log4j.properties")
+  
   def main(args:Array[String])=
   {
     try
     {
+  
       val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
-      log.info("======process started at " + format.format(Calendar.getInstance().getTime()))
+      logger.warn("======process started at " + format.format(Calendar.getInstance().getTime()))
       
       val spark = SparkSession.builder()
        .config("hive.metastore.uris","thrift://localhost:9083")
@@ -22,26 +28,17 @@ object runretail {
       .enableHiveSupport()
       .getOrCreate()
       
-      spark.sparkContext.setLogLevel("ERROR")
+      spark.sparkContext.setLogLevel("WARN")
       
       //===================staging load==========================
+      stagingprocess.stageprocess(spark)
       
-      //create database
-      spark.sql("create database if not exists retail_stg")
-      log.info("======staging process started at " + format.format(Calendar.getInstance().getTime()))
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Customers.csv","retail_stg.tblcustomer_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Product_Categories.csv","retail_stg.tblproductcategory_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Product_Subcategories.csv","retail_stg.tblproductsubcategory_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Sales_*.csv","retail_stg.tblsales_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Territories.csv","retail_stg.tblterritory_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Products.csv","retail_stg.tblproduct_stg")
-      log.info("======staging process completed at " + format.format(Calendar.getInstance().getTime()))
     
       //==================curation process======================
+      curationprocess.curateprocess(spark)
       
-      
-      
-      //==================consumer/publish load ===================
+      //==================aggregation load =====================
+      aggregateprocess.aggrprocess(spark)
     
     }
      catch 
@@ -50,7 +47,7 @@ object runretail {
           case ex: Exception => 
           {
               println("Error Occured:" + ex.getMessage)
-              log.info("Error Occured:" + ex.getMessage)
+              logger.warn("Error Occured:" + ex.getMessage)
           }
         }
   }
