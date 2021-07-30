@@ -24,7 +24,8 @@ object runretail {
       val spark = SparkSession.builder()
       //.config("hive.metastore.uris","thrift://localhost:9083")
       .appName("Retail-coreengine")
-      .master("local")
+      .config("spark.sql.debug.maxToStringFields", 1000)
+      //.master("local")
       .enableHiveSupport()
       .getOrCreate()
       
