@@ -15,8 +15,8 @@ object aggregateprocess
     logger.warn("====aggregation process started at " + format.format(Calendar.getInstance().getTime()))
     
     spark.sql("create database if not exists retail_agg")
-    val dfsales = spark.sql("""select s.Order_Date,p.ProductName,p.CategoryName,sum(s.OrderQuantity) orderquantity,sum(p.ProductCost) productcost,sum(p.ProductPrice) productprice 
-      from retail_curated.tblsales_dtl s inner join  retail_curated.tblproduct_dtl p on s.ProductKey = p.ProductKey group by s.Order_Date,p.ProductName,p.CategoryName""")
+    val dfsales = spark.sql("""select s.Order_Date,sum(s.OrderQuantity) orderquantity,sum(p.ProductCost) productcost,sum(p.ProductPrice) productprice 
+      from retail_curated.tblsales_dtl s inner join  retail_curated.tblproduct_dtl p on s.ProductKey = p.ProductKey group by s.Order_Date""")
     
     dfsales.write.mode("overwrite").partitionBy("Order_Date").saveAsTable("retail_agg.tbl_fact_productsales")
     
