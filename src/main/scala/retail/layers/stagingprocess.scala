@@ -15,12 +15,12 @@ object stagingprocess
     //create database
       spark.sql("create database if not exists retail_stg")
       logger.warn("======staging process started at " + format.format(Calendar.getInstance().getTime()))
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Customers.csv","retail_stg.tblcustomer_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Product_Categories.csv","retail_stg.tblproductcategory_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Product_Subcategories.csv","retail_stg.tblproductsubcategory_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Sales_*.csv","retail_stg.tblsales_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Territories.csv","retail_stg.tblterritory_stg")
-      readfileandwriteintostaging(spark,"file:/apps/data/RetailData/Retail_Products.csv","retail_stg.tblproduct_stg")
+      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Customers.csv","retail_stg.tblcustomer_stg")
+      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Product_Categories.csv","retail_stg.tblproductcategory_stg")
+      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Product_Subcategories.csv","retail_stg.tblproductsubcategory_stg")
+      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Sales_*.csv","retail_stg.tblsales_stg")
+      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Territories.csv","retail_stg.tblterritory_stg")
+      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Products.csv","retail_stg.tblproduct_stg")
       logger.warn("======staging process completed at " + format.format(Calendar.getInstance().getTime()))
     
   }
