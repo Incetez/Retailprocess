@@ -24,7 +24,8 @@ object runretail {
       val prop = new Properties()
       prop.load(confdata)
       val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
-      logger.warn("======process started at " + format.format(Calendar.getInstance().getTime()))
+      val starttime = Calendar.getInstance().getTimeInMillis()
+      logger.warn("======process started at " + format.format(starttime))
       
       val spark = SparkSession.builder()
       //.config("hive.metastore.uris","thrift://localhost:9083")
@@ -46,6 +47,11 @@ object runretail {
       
       //==================aggregation load =====================
       aggregateprocess.aggrprocess(spark,prop)
+      val endtime = Calendar.getInstance().getTimeInMillis()
+      
+      val processtime = (endtime - starttime) / (100 * 60) 
+      logger.warn("Time taken to complete the process: " + processtime)
+      
     
     }
      catch 
