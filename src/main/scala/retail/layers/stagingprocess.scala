@@ -19,8 +19,8 @@ object stagingprocess
       
       if(prop.getProperty("srctype").trim() == "S3")
       {
-        spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", "XXXXXXXXXXXX")
-        spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", prop.getProperty("fs.s3a.awsAccessKeyId"))
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", prop.getProperty("fs.s3a.awsSecretAccessKey"))
         spark.sparkContext.hadoopConfiguration.set("com.amazonaws.services.s3.enableV4", "true")
         spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
         spark.sparkContext.hadoopConfiguration.set("fs.s3a.aws.credentials.provider","org.apache.hadoop.fs.s3a.BasicAWSCredentialsProvider") 
