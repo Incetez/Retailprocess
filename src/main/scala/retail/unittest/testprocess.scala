@@ -16,7 +16,7 @@ object testprocess
       .enableHiveSupport()
       .getOrCreate()
      
-      curationprocess.curateprocess(spark)
+      //curationprocess.curateprocess(spark)
     
   }
 }

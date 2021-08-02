@@ -5,11 +5,12 @@ import retail.driver.runretail.logger
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import org.apache.spark.sql.functions.regexp_replace
+import java.util.Properties
 
 object curationprocess 
 {
   val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
-  def curateprocess(spark:SparkSession)=
+  def curateprocess(spark:SparkSession,prop:Properties)=
   {
     spark.sql("DROP DATABASE IF EXISTS retail_curated CASCADE")
     spark.sql("create database if not exists retail_curated")

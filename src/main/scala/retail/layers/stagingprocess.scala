@@ -5,23 +5,34 @@ import retail.driver.runretail.logger
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import org.apache.spark.sql.functions.regexp_replace
+import java.util.Properties
 
 object stagingprocess 
 {
   val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
-  def stageprocess(spark:SparkSession)=
+  def stageprocess(spark:SparkSession,prop:Properties)=
   {
     
-    //create database
+      //create database
       spark.sql("DROP DATABASE IF EXISTS retail_stg CASCADE")
       spark.sql("create database if not exists retail_stg")
+      
+      if(prop.getProperty("srctype").trim() == "S3")
+      {
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsAccessKeyId", "XXXXXXXXXXXX")
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.awsSecretAccessKey", "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+        spark.sparkContext.hadoopConfiguration.set("com.amazonaws.services.s3.enableV4", "true")
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.aws.credentials.provider","org.apache.hadoop.fs.s3a.BasicAWSCredentialsProvider") 
+        spark.sparkContext.hadoopConfiguration.set("fs.s3a.endpoint", "s3.amazonaws.com")
+      }
       logger.warn("======staging process started at " + format.format(Calendar.getInstance().getTime()))
-      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Customers.csv","retail_stg.tblcustomer_stg")
-      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Product_Categories.csv","retail_stg.tblproductcategory_stg")
-      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Product_Subcategories.csv","retail_stg.tblproductsubcategory_stg")
-      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Sales_*.csv","retail_stg.tblsales_stg")
-      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Territories.csv","retail_stg.tblterritory_stg")
-      readfileandwriteintostaging(spark,"hdfs://ip-172-31-30-223.ec2.internal:8020/tmp/retaildata/Retail_Products.csv","retail_stg.tblproduct_stg")
+      readfileandwriteintostaging(spark,prop.getProperty("srccustomer"),"retail_stg.tblcustomer_stg")
+      readfileandwriteintostaging(spark,prop.getProperty("srcproductcategory"),"retail_stg.tblproductcategory_stg")
+      readfileandwriteintostaging(spark,prop.getProperty("srcproductsubcategory"),"retail_stg.tblproductsubcategory_stg")
+      readfileandwriteintostaging(spark,prop.getProperty("srcsales"),"retail_stg.tblsales_stg")
+      readfileandwriteintostaging(spark,prop.getProperty("srcterritory"),"retail_stg.tblterritory_stg")
+      readfileandwriteintostaging(spark,prop.getProperty("srcproduct"),"retail_stg.tblproduct_stg")
       logger.warn("======staging process completed at " + format.format(Calendar.getInstance().getTime()))
     
   }

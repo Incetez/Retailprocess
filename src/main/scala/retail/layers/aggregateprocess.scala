@@ -5,11 +5,12 @@ import retail.driver.runretail.logger
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import org.apache.spark.sql.functions.regexp_replace
+import java.util.Properties
 
 object aggregateprocess 
 {
   val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
-  def aggrprocess(spark:SparkSession)=
+  def aggrprocess(spark:SparkSession,prop:Properties)=
   {
     
     logger.warn("====aggregation process started at " + format.format(Calendar.getInstance().getTime()))

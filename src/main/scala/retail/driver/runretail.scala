@@ -6,11 +6,13 @@ import java.util.Calendar
 import org.apache.spark.sql.SparkSession
 import org.apache.log4j.PropertyConfigurator
 import retail.layers._
-
+import java.util.Properties
+import java.io.FileInputStream
 
 object runretail {
   
   val logger = Logger.getLogger(this.getClass.getName)
+  
  
   
   def main(args:Array[String])=
@@ -18,6 +20,9 @@ object runretail {
     try
     {
       PropertyConfigurator.configure("log4j.properties")
+      val confdata = new FileInputStream("app.properties")
+      val prop = new Properties()
+      prop.load(confdata)
       val format = new SimpleDateFormat("yyyy-MM-dd h:m:s")
       logger.warn("======process started at " + format.format(Calendar.getInstance().getTime()))
       
@@ -25,6 +30,7 @@ object runretail {
       //.config("hive.metastore.uris","thrift://localhost:9083")
       .appName("Retail-coreengine")
       .config("spark.sql.debug.maxToStringFields", 1000)
+      
       //.master("local")
       .enableHiveSupport()
       .getOrCreate()
@@ -32,14 +38,14 @@ object runretail {
       spark.sparkContext.setLogLevel("WARN")
       
       //===================staging load==========================
-      stagingprocess.stageprocess(spark)
+      stagingprocess.stageprocess(spark,prop)
       
     
       //==================curation process======================
-      curationprocess.curateprocess(spark)
+      curationprocess.curateprocess(spark,prop)
       
       //==================aggregation load =====================
-      aggregateprocess.aggrprocess(spark)
+      aggregateprocess.aggrprocess(spark,prop)
     
     }
      catch 
