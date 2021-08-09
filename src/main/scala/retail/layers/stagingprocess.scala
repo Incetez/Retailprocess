@@ -52,7 +52,7 @@ object stagingprocess
     
     //write data into hive table
     df1.write.mode("overwrite").saveAsTable(tablename)
-    logger.warn("written data into hive table:" + tablename)     
+    logger.warn("written data into hive table:" + tablename)
     
   }
 }
