@@ -28,9 +28,9 @@ object runretail {
       logger.warn("======process started at " + format.format(starttime))
       
       val spark = SparkSession.builder()
-      .master("local")
-      .config("hive.metastore.uris","thrift://104.154.223.71:9083")
-       .config("spark.sql.warehouse.dir", "/user/hive/warehouse")
+      //.master("local")
+      .config("hive.metastore.uris","thrift://35.232.181.37:9083")
+      .config("spark.sql.warehouse.dir", "/user/hive/warehouse")
       .appName("Retail-coreengine")
       .config("spark.sql.debug.maxToStringFields", 1000)
       .enableHiveSupport()

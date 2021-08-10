@@ -528,3 +528,138 @@ org.apache.spark.SparkException: Job 30 cancelled because SparkContext was shut 
 	at retail.driver.runretail$.main(runretail.scala:41)
 	at retail.driver.runretail.main(runretail.scala)
 Error Occured:Job aborted.
+======process started at 2021-08-09 8:47:13
+Your hostname, localhost.localdomain resolves to a loopback address: 127.0.0.1; using 192.168.204.129 instead (on interface ens33)
+Set SPARK_LOCAL_IP if you need to bind to another address
+Running Spark version 2.4.7
+Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Error initializing SparkContext.
+org.apache.spark.SparkException: A master URL must be set in your configuration
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:368)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2520)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:930)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:921)
+	at scala.Option.getOrElse(Option.scala:121)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:921)
+	at retail.driver.runretail$.main(runretail.scala:35)
+	at retail.driver.runretail.main(runretail.scala)
+Uncaught exception in thread main
+java.lang.NullPointerException
+	at org.apache.spark.SparkContext.org$apache$spark$SparkContext$$postApplicationEnd(SparkContext.scala:2416)
+	at org.apache.spark.SparkContext$$anonfun$stop$1.apply$mcV$sp(SparkContext.scala:1931)
+	at org.apache.spark.util.Utils$.tryLogNonFatalError(Utils.scala:1340)
+	at org.apache.spark.SparkContext.stop(SparkContext.scala:1930)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:585)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2520)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:930)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:921)
+	at scala.Option.getOrElse(Option.scala:121)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:921)
+	at retail.driver.runretail$.main(runretail.scala:35)
+	at retail.driver.runretail.main(runretail.scala)
+Successfully stopped SparkContext
+Error Occured:A master URL must be set in your configuration
+======process started at 2021-08-09 8:47:44
+Your hostname, localhost.localdomain resolves to a loopback address: 127.0.0.1; using 192.168.204.129 instead (on interface ens33)
+Set SPARK_LOCAL_IP if you need to bind to another address
+Running Spark version 2.4.7
+Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Submitted application: Retail-coreengine
+Changing view acls to: hduser
+Changing modify acls to: hduser
+Changing view acls groups to: 
+Changing modify acls groups to: 
+SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hduser); groups with view permissions: Set(); users  with modify permissions: Set(hduser); groups with modify permissions: Set()
+Successfully started service 'sparkDriver' on port 34936.
+Registering MapOutputTracker
+Registering BlockManagerMaster
+Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+BlockManagerMasterEndpoint up
+Created local directory at /tmp/blockmgr-ca2fb2de-5a0e-446f-8470-c8eeb7bb0af7
+MemoryStore started with capacity 1307.1 MB
+Registering OutputCommitCoordinator
+Logging initialized @2241ms
+jetty-9.3.z-SNAPSHOT, build timestamp: unknown, git hash: unknown
+Started @2316ms
+Started ServerConnector@10ded6a9{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+Successfully started service 'SparkUI' on port 4040.
+Started o.s.j.s.ServletContextHandler@72c28d64{/jobs,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@57ea113a{/jobs/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@acdb094{/jobs/job,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@2b0f373b{/jobs/job/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@2ceb80a1{/stages,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@4b45dcb8{/stages/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@7216fb24{/stages/stage,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@35a9782c{/stages/stage/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@70a36a66{/stages/pool,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@45815ffc{/stages/pool/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@732f29af{/storage,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@d3957fe{/storage/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@6622fc65{/storage/rdd,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@299321e2{/storage/rdd/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@23fb172e{/environment,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@64ba3208{/environment/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@158a3b2e{/executors,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@25a6944c{/executors/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@5e1fa5b1{/executors/threadDump,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@6b00f608{/executors/threadDump/json,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@2f17e30d{/static,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@7cbc3762{/,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@3a6f2de3{/api,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@8692d67{/jobs/job/kill,null,AVAILABLE,@Spark}
+Started o.s.j.s.ServletContextHandler@78f5c518{/stages/stage/kill,null,AVAILABLE,@Spark}
+Bound SparkUI to 0.0.0.0, and started at http://192.168.204.129:4040
+Starting executor ID driver on host localhost
+Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 38923.
+Server created on 192.168.204.129:38923
+Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+Registering BlockManager BlockManagerId(driver, 192.168.204.129, 38923, None)
+Registering block manager 192.168.204.129:38923 with 1307.1 MB RAM, BlockManagerId(driver, 192.168.204.129, 38923, None)
+Registered BlockManager BlockManagerId(driver, 192.168.204.129, 38923, None)
+Initialized BlockManager: BlockManagerId(driver, 192.168.204.129, 38923, None)
+Sink class org.apache.spark.metrics.sink.MetricsServlet cannot be instantiated
+Error initializing SparkContext.
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.spark.metrics.MetricsSystem$$anonfun$registerSinks$1.apply(MetricsSystem.scala:202)
+	at org.apache.spark.metrics.MetricsSystem$$anonfun$registerSinks$1.apply(MetricsSystem.scala:196)
+	at scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:130)
+	at scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:130)
+	at scala.collection.mutable.HashTable$class.foreachEntry(HashTable.scala:236)
+	at scala.collection.mutable.HashMap.foreachEntry(HashMap.scala:40)
+	at scala.collection.mutable.HashMap.foreach(HashMap.scala:130)
+	at org.apache.spark.metrics.MetricsSystem.registerSinks(MetricsSystem.scala:196)
+	at org.apache.spark.metrics.MetricsSystem.start(MetricsSystem.scala:104)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:514)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2520)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:930)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:921)
+	at scala.Option.getOrElse(Option.scala:121)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:921)
+	at retail.driver.runretail$.main(runretail.scala:36)
+	at retail.driver.runretail.main(runretail.scala)
+Caused by: java.lang.NoClassDefFoundError: com/fasterxml/jackson/annotation/ObjectIdResolver
+	at com.fasterxml.jackson.databind.ObjectMapper.<init>(ObjectMapper.java:543)
+	at com.fasterxml.jackson.databind.ObjectMapper.<init>(ObjectMapper.java:448)
+	at org.apache.spark.metrics.sink.MetricsServlet.<init>(MetricsServlet.scala:48)
+	... 21 more
+Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.annotation.ObjectIdResolver
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 24 more
+Stopped Spark@10ded6a9{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+Stopped Spark web UI at http://192.168.204.129:4040
+MapOutputTrackerMasterEndpoint stopped!
+MemoryStore cleared
+BlockManager stopped
+BlockManagerMaster stopped
+OutputCommitCoordinator stopped!
+Successfully stopped SparkContext
+Error Occured:null
+Shutdown hook called
+Deleting directory /tmp/spark-89f70bbc-2d06-4bae-a08c-3624019322c2
